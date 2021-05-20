@@ -34,4 +34,9 @@ export const Product = list({
       },
     }),
   },
+  ui: {
+    listView: {
+      initialColumns: ['name', 'description', 'status', 'price'],
+    },
+  },
 });
