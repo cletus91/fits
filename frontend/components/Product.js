@@ -22,5 +22,5 @@ export default function Product({ product }) {
 }
 
 Product.propTypes = {
-  product: PropTypes.array,
+  product: PropTypes.object,
 };
