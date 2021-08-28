@@ -31,12 +31,7 @@ const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export default function CreateProduct() {
-  const { inputs, handleChange, resetForm, clearForm } = useForm({
-    image: '',
-    name: 'Wes',
-    price: 199,
-    description: 'Nice shoes',
-  });
+  const { inputs, handleChange, resetForm, clearForm } = useForm({});
 
   const [createProduct, { loading, error, data }] = useMutation(
     CREATE_PRODUCT_MUTATION,
@@ -53,7 +48,9 @@ export default function CreateProduct() {
           e.preventDefault();
           const res = await createProduct();
           clearForm();
-          Router.push({ pathname: `/product/${res.data.createProduct.id}` });
+          Router.push({
+            pathname: `/product/${res.data.createProduct.id}`,
+          });
         }}
       >
         <DisplayError error={error} />
