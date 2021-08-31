@@ -11,10 +11,11 @@ const SINGLE_ITEM_QUERY = gql`
   }
 `;
 
-export default function SingleProduct({ id }) {
+export default function SingleProduct({ query }) {
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id: query.id },
   });
+  if (loading) return <p>Loading...</p>;
   console.log({ data, loading, error });
 
   return (
