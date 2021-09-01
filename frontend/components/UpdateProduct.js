@@ -67,7 +67,7 @@ export default function UpdateProduct({ id }) {
             },
           }).catch(console.log(error));
           console.log('res', res);
-          clearForm();
+          //   clearForm();
         }}
       >
         <DisplayError error={error || updateError} />
