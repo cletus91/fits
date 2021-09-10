@@ -1,40 +1,24 @@
 import Link from 'next/link';
-import gql from 'graphql-tag';
 import Head from 'next/head';
-import { useQuery } from '@apollo/client';
 import PaginationStyles from './styles/PaginationStyles';
-import { perPage } from '../config';
 
-const PAGINATION_QUERY = gql`
-  query PAGINATION_QUERY {
-    _allProductsMeta {
-      count
-    }
-  }
-`;
-
-export default function Pagination({ page }) {
-  const { data, loading, error } = useQuery(PAGINATION_QUERY);
-  if (loading) return <p>Loading...</p>;
-  const totalItems = data._allProductsMeta.count;
-  const totalPages = Math.ceil(totalItems / perPage);
-  // const pageNum = parseInt(page);
+export default function Pagination({ productCount, pageCount, page }) {
   return (
     <PaginationStyles>
       <Head>
         <title>
-          Fits - Page {page} of {totalPages}
+          Fits - Page {page} of {pageCount}
         </title>
       </Head>
       <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}>Prev 👈</a>
       </Link>
       <p>
-        Page {page} of {totalPages}
+        Page {page} of {pageCount}
       </p>
-      <p>Total items: {totalItems} </p>
+      <p>Total items: {productCount} </p>
       <Link href={`/products/${page + 1}`}>
-        <a aria-disabled={page >= totalPages}>Next 👉</a>
+        <a aria-disabled={page >= pageCount}>Next 👉</a>
       </Link>
     </PaginationStyles>
   );

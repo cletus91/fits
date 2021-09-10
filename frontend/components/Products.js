@@ -27,10 +27,10 @@ const ProductListStyles = styled.div`
   grid-gap: 60px;
 `;
 
-export default function Products({ pageNum }) {
+export default function Products({ page }) {
   const { data, error, loading } = useQuery(ALL_PRODUCTS_QUERY, {
     variables: {
-      skip: pageNum * perPage - perPage,
+      skip: page * perPage - perPage,
       first: perPage,
     },
   });
