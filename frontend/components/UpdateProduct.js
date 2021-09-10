@@ -40,14 +40,14 @@ export default function UpdateProduct({ id }) {
   const { data, error, loading } = useQuery(SINGLE_PRODUCT_QUERY, {
     variables: { id },
   });
-  console.log(data);
+  // console.log(data);
 
   //   2. Get the mutation to update the product
   const [
     updateProduct,
     { data: updateData, error: updateError, loading: updateLoading },
   ] = useMutation(UPDATE_PRODUCT_MUTATION);
-  console.log('updateData', updateData);
+  // console.log('updateData', updateData);
 
   //   3. Form to handle the update
 
@@ -66,7 +66,7 @@ export default function UpdateProduct({ id }) {
               price: inputs.price,
             },
           }).catch(console.log(error));
-          console.log('res', res);
+          // console.log('res', res);
           //   clearForm();
         }}
       >
