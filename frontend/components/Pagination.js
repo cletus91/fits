@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import gql from 'graphql-tag';
+import Head from 'next/head';
 import { useQuery } from '@apollo/client';
 import PaginationStyles from './styles/PaginationStyles';
 import { perPage } from '../config';
@@ -20,15 +21,20 @@ export default function Pagination({ page }) {
   // const pageNum = parseInt(page);
   return (
     <PaginationStyles>
+      <Head>
+        <title>
+          Fits - Page {page} of {totalPages}
+        </title>
+      </Head>
       <Link href={`/products/${page - 1}`}>
-        <a aria-disabled={page === 1}>Prev 👈</a>
+        <a aria-disabled={page <= 1}>Prev 👈</a>
       </Link>
       <p>
         Page {page} of {totalPages}
       </p>
       <p>Total items: {totalItems} </p>
       <Link href={`/products/${page + 1}`}>
-        <a aria-disabled={page === totalPages}>Next 👉</a>
+        <a aria-disabled={page >= totalPages}>Next 👉</a>
       </Link>
     </PaginationStyles>
   );
