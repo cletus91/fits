@@ -17,6 +17,7 @@ export default function Pagination({ page }) {
   if (loading) return <p>Loading...</p>;
   const totalItems = data._allProductsMeta.count;
   const totalPages = Math.ceil(totalItems / perPage);
+  // const pageNum = parseInt(page);
   return (
     <PaginationStyles>
       <Link href={`/products/${page - 1}`}>
