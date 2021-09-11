@@ -10,6 +10,7 @@ export default function Pagination({ productCount, pageCount, page }) {
           Fits - Page {page} of {pageCount}
         </title>
       </Head>
+
       <Link href={`/products/${page - 1}`}>
         <a aria-disabled={page <= 1}>Prev 👈</a>
       </Link>
