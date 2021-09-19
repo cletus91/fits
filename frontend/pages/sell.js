@@ -1,10 +1,11 @@
 import CreateProduct from '../components/CreateProduct';
+import PleaseSignIn from '../components/PleaseSignIn';
 
 export default function sell() {
   return (
-    <div>
-      <p>I/m the sell page</p>
+    <PleaseSignIn>
+      <p>Create a Product Listing</p>
       <CreateProduct />
-    </div>
+    </PleaseSignIn>
   );
 }
