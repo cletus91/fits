@@ -63,12 +63,12 @@ export default function SignUp() {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="signupemail">
             Email
             <input
               type="email"
               name="email"
-              id="email"
+              id="signupemail"
               placeholder="Enter your email"
               autoComplete="email"
               required
@@ -76,13 +76,14 @@ export default function SignUp() {
               onChange={handleChange}
             />
           </label>
-          <label htmlFor="password">
+          <label htmlFor="signuppassword">
             Password
             <input
               type="password"
               name="password"
-              id="password"
+              id="signuppassword"
               placeholder="Enter your password"
+              autoComplete="new-password"
               required
               value={inputs.password}
               onChange={handleChange}
