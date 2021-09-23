@@ -9,6 +9,7 @@ import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { insertSeedData } from './seed-data';
+import { passwordResetEmail } from './lib/mail';
 
 const databaseURL =
 	process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -22,6 +23,7 @@ const { withAuth } = createAuth({
 	listKey: 'User',
 	identityField: 'email',
 	secretField: 'password',
+	// eslint-disable-next-line @typescript-eslint/indent
 	initFirstItem: {
 		fields: ['name', 'email', 'password'],
 		// TODO: Add in initial roles here
@@ -29,6 +31,7 @@ const { withAuth } = createAuth({
 	passwordResetLink: {
 		async sendToken(args) {
 			console.log(args);
+			await passwordResetEmail(args.token, args.identity);
 		},
 	},
 });
