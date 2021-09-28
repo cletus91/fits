@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Cart from './Cart';
 import SignOut from './SignOut';
 import NavStyles from './styles/NavStyles';
 import { useUser } from './User';

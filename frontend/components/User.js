@@ -8,7 +8,21 @@ export const CURRENT_USER = gql`
         id
         name
         email
-        #   TODO: Cart of current user
+        cart {
+          id
+          quantity
+          product {
+            id
+            name
+            description
+            price
+            photo {
+              image {
+                publicUrlTransformed
+              }
+            }
+          }
+        }
       }
     }
   }
