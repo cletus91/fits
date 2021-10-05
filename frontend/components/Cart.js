@@ -5,6 +5,7 @@ import CartItem from './CartItem';
 import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/cartState';
+import CloseButton from './styles/CloseButton';
 
 export default function Cart() {
   const { cartOpen, closeCart } = useCart();
@@ -16,8 +17,8 @@ export default function Cart() {
     <CartStyles open={cartOpen}>
       <header>
         <Supreme>{me.name}'s Cart</Supreme>
+        <CloseButton onClick={closeCart}>&times;</CloseButton>
       </header>
-      <button onClick={closeCart}>&times;</button>
       <ul>
         {me.cart.map((cartItem) => (
           <CartItem key={cartItem.id} cartItem={cartItem} />
