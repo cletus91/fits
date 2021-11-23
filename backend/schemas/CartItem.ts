@@ -12,7 +12,6 @@ export const CartItem = list({
     product: relationship({ ref: 'Product' }),
     user: relationship({
       ref: 'User.cart',
-      many: true,
       ui: {
         createView: { fieldMode: 'hidden' },
         listView: {
