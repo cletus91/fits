@@ -1,8 +1,6 @@
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
-import { identity } from 'lodash';
 import styled from 'styled-components';
-import { CURRENT_USER } from './User';
 
 const DELETE_CART_ITEM_MUTATION = gql`
   mutation DELETE_CART_ITEM_MUTATION($id: ID!) {
@@ -24,7 +22,7 @@ const DeleteButton = styled.button`
 `;
 
 function update(cache, payload) {
-  cache.evict(cache, identity(payload.data.deleteCartItem));
+  cache.evict(cache.identify(payload.data.deleteCartItem));
 }
 
 export default function DeleteCartItem({ id }) {
