@@ -38,8 +38,8 @@ export default function Reset({ token }) {
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await reset().catch(console.log(successfullError));
-    console.log(res);
-    console.log({ data, loading });
+    // console.log(res);
+    // console.log({ data, loading });
     resetForm();
   }
 

@@ -12,7 +12,7 @@ export default function SignOut() {
   const [signout, { data, loading }] = useMutation(SIGN_OUT_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER }],
   });
-  console.log({ data, loading });
+  // console.log({ data, loading });
   return (
     <button type="submit" onClick={signout}>
       Sign Out

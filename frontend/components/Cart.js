@@ -12,7 +12,7 @@ export default function Cart() {
   const me = useUser();
   if (!me) return null;
 
-  console.log(me);
+  // console.log(me);
   return (
     <CartStyles open={cartOpen}>
       <header>
