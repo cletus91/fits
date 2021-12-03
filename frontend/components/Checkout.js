@@ -8,10 +8,11 @@ import {
 import { loadStripe } from '@stripe/stripe-js';
 import gql from 'graphql-tag';
 import nProgress from 'nprogress';
-import { element } from 'prop-types';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SickButton from './styles/SickButton';
+import { CURRENT_USER } from './User';
+import { useCart } from '../lib/cartState';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -44,12 +45,16 @@ const ErrorStyles = styled.div`
 const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 function CheckoutForm() {
+  const { closeCart } = useCart();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER }],
+    }
   );
 
   async function handleSubmit(e) {
@@ -80,6 +85,7 @@ function CheckoutForm() {
     console.log(`Finsihed with the order`);
     // 6. Change the page to view the order
     // 7. Close the cart
+    closeCart();
     // 8. Turn the loader off
     setLoading(false);
     nProgress.done();
@@ -88,7 +94,7 @@ function CheckoutForm() {
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <ErrorStyles>{error.message}</ErrorStyles>}
-      {graphQLError && <ErrorStyles>{error.message}</ErrorStyles>}
+      {graphQLError && <ErrorStyles>{graphQLError.message}</ErrorStyles>}
       <CardElement />
       <SickButton>Checkout Now 🛒</SickButton>
     </CheckoutFormStyles>
