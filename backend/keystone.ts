@@ -7,6 +7,8 @@ import {
 } from '@keystone-next/keystone/session';
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
+import { OrderItem } from './schemas/OrderItem';
+import { Order } from './schemas/Order';
 import { ProductImage } from './schemas/ProductImage';
 import { insertSeedData } from './seed-data';
 import { passwordResetEmail } from './lib/mail';
@@ -63,6 +65,8 @@ export default withAuth(
       Product,
       ProductImage,
       CartItem,
+      OrderItem,
+      Order,
     }),
     extendGraphqlSchema,
     ui: {

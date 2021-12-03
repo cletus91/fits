@@ -48,6 +48,7 @@ function CheckoutForm() {
     // 4. Handle errors from Stripe
     if (error) {
       setError(error);
+      nProgress.done();
     }
     // 5. Send token from step 3 to keystone server via a custom mutation
     // 6. Change the page to view the order

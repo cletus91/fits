@@ -36,12 +36,12 @@ export default function paginationField() {
     },
     merge(existing, incoming, { args }) {
       const { skip } = args;
-      console.log(`Merging items from the network ${incoming.length}`);
+      // console.log(`Merging items from the network ${incoming.length}`);
       const merged = existing ? existing.slice(0) : [];
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
+      // console.log(merged);
       return merged;
     },
   };
