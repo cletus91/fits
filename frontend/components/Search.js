@@ -28,6 +28,12 @@ const SEARCH_PRODUCTS_QUERY = gql`
   }
 `;
 
+const SearchTerms = styled.em`
+  font-size: 2.5rem;
+  color: var(--red);
+  text-decoration: underline;
+`;
+
 export default function Search() {
   const router = useRouter();
   const [findItems, { loading, data, error }] = useLazyQuery(
@@ -66,11 +72,6 @@ export default function Search() {
     itemToString: (item) => item?.name || '',
   });
 
-  const SearchTerms = styled.em`
-    font-size: 2.5rem;
-    color: var(--red);
-    text-decoration: underline;
-  `;
   return (
     <SearchStyles>
       <div {...getComboboxProps()}>
