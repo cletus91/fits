@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import nProgress from 'nprogress';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/dist/client/router';
 import SickButton from './styles/SickButton';
 import { CURRENT_USER } from './User';
 import { useCart } from '../lib/cartState';
@@ -46,6 +47,7 @@ const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 
 function CheckoutForm() {
   const { closeCart } = useCart();
+  const router = useRouter();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const stripe = useStripe();
@@ -81,9 +83,13 @@ function CheckoutForm() {
         token: paymentMethod.id,
       },
     });
-
+    console.log(order);
     console.log(`Finsihed with the order`);
     // 6. Change the page to view the order
+    router.push({
+      pathname: '/order/[orderId]',
+      query: { orderId: order.data.checkout.id },
+    });
     // 7. Close the cart
     closeCart();
     // 8. Turn the loader off
