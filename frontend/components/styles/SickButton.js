@@ -10,8 +10,12 @@ const SickButton = styled.button`
   font-size: 2rem;
   padding: 0.8rem 1.5rem;
   transform: skew(-2deg);
+  cursor: pointer;
   display: inline-block;
   transition: all 0.5s;
+  :hover {
+    transform: translate(2px, 0px);
+  }
   &[disabled] {
     opacity: 0.5;
   }
