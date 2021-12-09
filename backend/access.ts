@@ -31,4 +31,10 @@ export const rules = {
     // 2. If not, do they own the product
     return { user: { id: session.itemId } };
   },
+  canReadProducts({ session }: ListAccessArgs) {
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    return { status: 'AVAILABLE' };
+  },
 };

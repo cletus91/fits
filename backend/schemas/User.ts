@@ -23,7 +23,7 @@ export const User = list({
     role: relationship({
       ref: 'Role.assignedTo',
     }),
-    prducts: relationship({
+    products: relationship({
       ref: 'Product.user',
       many: true,
     }),
