@@ -15,6 +15,7 @@ import { insertSeedData } from './seed-data';
 import { passwordResetEmail } from './lib/mail';
 import { CartItem } from './schemas/CartItem';
 import { extendGraphqlSchema } from './mutations/index';
+import { permissionsList } from './schemas/fields';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits-tutorial';
@@ -79,7 +80,7 @@ export default withAuth(
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: 'id',
+      User: `id email name role {${permissionsList.join(' ')}}`,
     }),
   })
 );
