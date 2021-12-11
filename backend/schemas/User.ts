@@ -1,9 +1,19 @@
 import { list } from '@keystone-next/keystone/schema';
 import { text, password, relationship } from '@keystone-next/fields';
+import { permissions, rules } from '../access';
 
 export const User = list({
-  // access:
-  // ui:
+  access: {
+    create: () => true,
+    read: rules.canManageUsers,
+    update: rules.canManageUsers,
+    delete: rules.canManageUsers,
+  },
+  ui: {
+    hideCreate: (args) => !permissions.canManageRoles(args),
+    hideDelete: (args) => !permissions.canManageRoles(args),
+    isHidden: (args) => !permissions.canManageRoles(args),
+  },
   fields: {
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),

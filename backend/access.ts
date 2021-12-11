@@ -27,35 +27,53 @@ export const rules = {
     if (!isSignedIn({ session })) {
       return false;
     }
-    //   1. Do they have permission of canManageProducts
+    // 1. Do they have the permission of canManageProducts
     if (permissions.canManageProducts({ session })) {
       return true;
     }
-    // 2. If not, do they own the product
+    // 2. If not, do they own this item?
     return { user: { id: session.itemId } };
+  },
+  canOrder({ session }: ListAccessArgs) {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // 1. Do they have the permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    // 2. If not, do they own this item?
+    return { user: { id: session.itemId } };
+  },
+  canManageOrderItem({ session }: ListAccessArgs) {
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    // 1. Do they have the permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    // 2. If not, do they own this item?
+    return { order: { user: { id: session.itemId } } };
   },
   canReadProducts({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;
     }
     if (permissions.canManageProducts({ session })) {
-      return true;
+      return true; // They can read everything!
     }
+    // They should only see available products (based on the status field)
     return { status: 'AVAILABLE' };
   },
-  canOrder({ session }: ListAccessArgs) {
+  canManageUsers({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
       return false;
     }
-    if (permissions.canManageCart({ session })) {
+    if (permissions.canManageUsers({ session })) {
       return true;
     }
-    return { user: { id: session.itemId } };
-  },
-  canManageOrderItem({ session }: ListAccessArgs) {
-    if (permissions.canManageCart({ session })) {
-      return true;
-    }
-    return { order: { user: { id: session.itemId } } };
+    // Otherwise they may only update themselves!
+    return { id: session.itemId };
   },
 };
