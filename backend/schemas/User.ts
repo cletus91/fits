@@ -7,12 +7,11 @@ export const User = list({
     create: () => true,
     read: rules.canManageUsers,
     update: rules.canManageUsers,
-    delete: rules.canManageUsers,
+    delete: permissions.canManageUsers,
   },
   ui: {
     hideCreate: (args) => !permissions.canManageRoles(args),
     hideDelete: (args) => !permissions.canManageRoles(args),
-    isHidden: (args) => !permissions.canManageRoles(args),
   },
   fields: {
     name: text({ isRequired: true }),
@@ -32,6 +31,10 @@ export const User = list({
     }),
     role: relationship({
       ref: 'Role.assignedTo',
+      access: {
+        read: permissions.canManageUsers,
+        update: permissions.canManageUsers,
+      },
     }),
     products: relationship({
       ref: 'Product.user',
