@@ -41,7 +41,7 @@ export const Product = list({
     user: relationship({
       ref: 'User.products',
       defaultValue: ({ context }) => ({
-        connect: { id: context.session.itemd },
+        connect: { id: context.session.itemId },
       }),
     }),
   },
