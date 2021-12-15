@@ -29,7 +29,11 @@ export default function DeleteProduct({ id, children }) {
         type="button"
         onClick={() => {
           if (confirm('Are you sure you want to delete this product?')) {
-            deleteProduct(id).catch((error) => error.message);
+            deleteProduct(id).catch((error) =>
+              alert(
+                `This action cannot be performed. GraphQL Error: ${error.message}`
+              )
+            );
             console.log(id);
           }
         }}
